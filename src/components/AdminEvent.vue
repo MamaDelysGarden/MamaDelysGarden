@@ -42,50 +42,46 @@ export default {
   },
   methods: {
     async deleteProduct(e, done) {
-      try {
-        await this.$apollo.mutate({
-          mutation: gql.mutations.deleteProduct,
-          variables: {
-            id: this.product.id
-          }
-        })
-        await this.$apollo.queries.product.refetch()
+      await this.$apollo.mutate({
+        mutation: gql.mutations.deleteEvent,
+        variables: {
+          id: this.product.id
+        }
+      })
+      await this.$apollo.queries.event.refetch()
 
-        done()
-        Toast.create.positive({
-          html: 'Product Deleted'
-        })
-      } catch (e) {
-        Toast.create.negative({
-          html: 'Error Deleting Product'
-        })
-      }
-      this.$router.push({ name: 'admin-products' })
+      done()
+      Toast.create.positive({
+        html: 'Eve t Deleted'
+      })
+      this.$router.push({ name: 'admin-events' })
 
     },
     async saveChanges(e, done) {
       try {
         await this.$apollo.mutate({
-          mutation: gql.mutations[this.isAdd ? 'createProduct' : 'updateProduct'],
-          variables: { ...this.editProduct },
+          mutation: gql.mutations[this.isAdd ? 'createEvent' : 'updateEvent'],
+          variables: { ...this.editEvent },
         })
 
         this.loading = 1
 
-        await this.$apollo.queries.product.refetch()
+        await this.$apollo.queries.event.refetch()
 
         done()
         Toast.create.positive({
-          html: this.isAdd ? 'Product Added' : 'Product Updated'
+          html: this.isAdd ? 'Event Added' : 'Event Updated'
         })
         this.loading = 0
-
-      } catch (e) {
+      }
+      catch (e) {
         Toast.create.negative({
           html: this.isAdd ? 'Error Adding Product' : 'Error Updating Product'
         })
       }
       this.$router.push({ name: 'admin-products' })
+
+
     }
   },
   apollo: {

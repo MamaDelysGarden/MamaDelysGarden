@@ -30,6 +30,8 @@ import 'quasar-extras/material-icons'
 // import 'quasar-extras/ionicons'
 // import 'quasar-extras/fontawesome'
 // import 'quasar-extras/animate'
+import 'quasar-extras/animate/bounceInRight.css'
+import 'quasar-extras/animate/bounceOutRight.css'
 
 const apolloProvider = new VueApollo({
   defaultClient

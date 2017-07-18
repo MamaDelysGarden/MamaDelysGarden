@@ -8,6 +8,7 @@ function load(component) {
   return () => import(`@/${component}.vue`)
 }
 Vue.component('products', load('Products'))
+Vue.component('events', load('Events'))
 export default new VueRouter({
   /*
    * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
@@ -25,12 +26,21 @@ export default new VueRouter({
     {
       path: '/',
       component: load('Index'),
-      name: 'index',
       children: [
+        {
+          path: '',
+          component: load('Home'),
+          name: 'index'
+        },
         {
           path: 'products',
           component: load('Products'),
           name: 'products'
+        },
+        {
+          path: 'events',
+          component: load('Events'),
+          name: 'events'
         },
       ]
     },
@@ -53,6 +63,12 @@ export default new VueRouter({
           path: 'products/:id',
           component: load('AdminProduct'),
           name: 'admin-product',
+          props: true
+        },
+        {
+          path: 'events/:id',
+          component: load('AdminEvent'),
+          name: 'admin-event',
           props: true
         },
         {
