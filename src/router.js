@@ -5,9 +5,9 @@ Vue.use(VueRouter)
 
 function load(component) {
   // '@' is aliased to src/components
-  return () => System.import(`@/${component}.vue`)
+  return () => import(`@/${component}.vue`)
 }
-
+Vue.component('products', load('Products'))
 export default new VueRouter({
   /*
    * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
@@ -25,17 +25,24 @@ export default new VueRouter({
     {
       path: '/',
       component: load('Index'),
-      name: 'index'
+      name: 'index',
+      children: [
+        {
+          path: 'products',
+          component: load('Products'),
+          name: 'products'
+        },
+      ]
     },
-
     {
       path: '/admin',
       component: load('Admin'),
       children: [
         {
           path: '',
-          component: load('Dashboard'),
-          name: 'dashboard'
+          redirect: {
+            name: 'admin-products'
+          }
         },
         {
           path: 'products',
@@ -55,7 +62,7 @@ export default new VueRouter({
         },
       ]
     },
-    
+
 
 
     // Always leave this last one

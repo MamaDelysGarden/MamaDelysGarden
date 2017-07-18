@@ -7,7 +7,6 @@ export default {
     products: `query AllProducts($first: Int, $skip: Int, $search: String) {
             products: allProducts(first: $first, skip: $skip, filter: {name_contains: $search}) {
                 id
-                images
                 image
                 name
                 description
@@ -16,7 +15,6 @@ export default {
     product: `query Product($id: ID!) {
           product: Product(id: $id) {
             image
-            images
             description
             id
             createdAt
@@ -30,7 +28,7 @@ export default {
             }
         }`,
     events: `query AllEvents($first: Int, $skip: Int, $search: String) {
-            items: allEvents(first: $first, skip: $skip, filter: {name_contains: $search}) {
+            events: allEvents(first: $first, skip: $skip, filter: {name_contains: $search}) {
                 id
                 name
                 description

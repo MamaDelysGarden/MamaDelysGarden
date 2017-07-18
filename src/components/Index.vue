@@ -7,7 +7,9 @@
       q-toolbar-title Mama Dely's Garden
       q-btn(flat v-for="({name,icon},i) in routes", :key="i" round small @click="$router.push({name})")
         q-icon(:name="icon")
-      
+    div(style="min-width: 100vh")
+      h2.capitalize.layout-padding.text-secondary.bg-primary(style="padding-bottom: 16px") {{$route.name}}
+      router-view
 </template>
 
 <script>
@@ -27,6 +29,6 @@ export default {
         "https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/18664564_300401140416280_7362651819520374646_n.jpg?_nc_eui2=v1%3AAeG7ktiepZRLilq3TLe1Gqe5guhG2gdN48TxCV6I5x63L92VQ6WTvPayIMywFnau8xy1FURLpZki26E9LBvaxHWMQtBbEVYzOf1r_0Y-83gsEg&oh=e8cfc72cd0568d5bc135387fbffb08a3&oe=59FB5028"
       ]
     }
-  }
+  },
 }
 </script>

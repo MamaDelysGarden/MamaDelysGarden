@@ -15,10 +15,12 @@ export default {
     }
   }
 }`,
-    createProduct: `mutation CreateProduct($id: ID!, $image: String!, $name: String!, $description: String!) {
+    createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!) {
   product: createProduct(image: $image, description: $description, name: $name) {
     id
     image
+    name
+    description
     createdAt
     updatedAt
   }
@@ -27,6 +29,8 @@ export default {
   product: updateProduct(id: $id, image: $image, description: $description, name: $name) {
     id
     image
+    name
+    description
     createdAt
     updatedAt
   }

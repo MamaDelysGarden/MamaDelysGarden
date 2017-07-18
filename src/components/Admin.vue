@@ -17,11 +17,6 @@ export default {
 
       routes: [
         {
-          name: 'dashboard',
-          label: 'Dashboard',
-          icon: 'dashboard'
-        },
-        {
           name: 'admin-products',
           label: 'Products',
           icon: 'shopping_basket'
