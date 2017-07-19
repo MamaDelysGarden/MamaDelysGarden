@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import gql from '../gql'
 import { Toast } from 'quasar'
 export default {
   name: 'admin-product',
   props: ['id'],
+  inject: ['gql'],
   data() {
     return {
       editProduct: {
@@ -44,7 +44,7 @@ export default {
     async deleteProduct(e, done) {
       try {
         await this.$apollo.mutate({
-          mutation: gql.mutations.deleteProduct,
+          mutation: this.gql.mutations.deleteProduct,
           variables: {
             id: this.product.id
           }
@@ -66,7 +66,7 @@ export default {
     async saveChanges(e, done) {
       try {
         await this.$apollo.mutate({
-          mutation: gql.mutations[this.isAdd ? 'createProduct' : 'updateProduct'],
+          mutation: this.gql.mutations[this.isAdd ? 'createProduct' : 'updateProduct'],
           variables: { ...this.editProduct },
         })
 
@@ -90,7 +90,9 @@ export default {
   },
   apollo: {
     product: {
-      query: gql.queries.product,
+      query() {
+        return this.gql.queries.product
+      },
       loadingKey: 'loading',
       variables() {
         return {

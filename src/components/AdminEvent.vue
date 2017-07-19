@@ -2,25 +2,26 @@
   .layout-padding(v-if="ready" style="padding-bottom: 100px")
     q-btn(round color="secondary" big loader, :disabled="notChanged", @click="saveChanges" style="bottom: 18px; right: 18px;").fixed-bottom-right.z-absolute
       q-icon(name="save")
-    q-btn(round color="negative" v-if="!isAdd" big loader @click="deleteProduct" style="bottom: 18px; left: 18px;").fixed-bottom-left.z-absolute
+    q-btn(round color="negative" v-if="!isAdd" big loader @click="deleteEvent" style="bottom: 18px; left: 18px;").fixed-bottom-left.z-absolute
       q-icon(name="delete")
-    h4.ellipsis {{product ? product.name : 'Add Product'}}
-    q-input(v-model="editProduct.name" float-label="Name", :readonly="loading")
-    q-input(v-model="editProduct.description" type="textarea" float-label="Description", :readonly="loading")
+    h4.ellipsis {{event ? event.name : 'Add Event'}}
+    q-input(v-model="editEvent.name" float-label="Name", :readonly="loading")
+    q-input(v-model="editEvent.description" type="textarea" float-label="Description", :readonly="loading")
     .text-center
-      img(:src="product ? product.image : editProduct.image" style="height: 300px; width: 300px")
-    q-input(v-model="editProduct.image" float-label="Image", :readonly="loading")
+      img(:src="event ? event.image : editEvent.image" style="height: 300px; width: 300px")
+    q-input(v-model="editEvente.image" float-label="Image", :readonly="loading")
 </template>
 
 <script>
-import gql from '../gql'
+
 import { Toast } from 'quasar'
 export default {
   name: 'admin-product',
   props: ['id'],
+  inject: ['gql'],
   data() {
     return {
-      editProduct: {
+      editEvent: {
         name: '',
         description: '',
         image: ''
@@ -30,29 +31,29 @@ export default {
   },
   computed: {
     ready() {
-      return !this.loading && (this.product || this.editProduct)
+      return !this.loading && (this.event || this.editEvent)
     },
     notChanged() {
-      if (!this.product) return
-      return Object.keys(this.editProduct).every(key => this.editProduct[key] === this.product[key])
+      if (!this.event) return
+      return Object.keys(this.editEvent).every(key => this.editEvent[key] === this.event[key])
     },
     isAdd() {
-      return this.id === 'add' && !this.product
+      return this.id === 'add' && !this.event
     }
   },
   methods: {
-    async deleteProduct(e, done) {
+    async deleteEvent(e, done) {
       await this.$apollo.mutate({
-        mutation: gql.mutations.deleteEvent,
+        mutation: this.gql.mutations.deleteEvent,
         variables: {
-          id: this.product.id
+          id: this.event.id
         }
       })
       await this.$apollo.queries.event.refetch()
 
       done()
       Toast.create.positive({
-        html: 'Eve t Deleted'
+        html: 'Event Deleted'
       })
       this.$router.push({ name: 'admin-events' })
 
@@ -60,7 +61,7 @@ export default {
     async saveChanges(e, done) {
       try {
         await this.$apollo.mutate({
-          mutation: gql.mutations[this.isAdd ? 'createEvent' : 'updateEvent'],
+          mutation: this.gql.mutations[this.isAdd ? 'createEvent' : 'updateEvent'],
           variables: { ...this.editEvent },
         })
 
@@ -76,25 +77,27 @@ export default {
       }
       catch (e) {
         Toast.create.negative({
-          html: this.isAdd ? 'Error Adding Product' : 'Error Updating Product'
+          html: this.isAdd ? 'Error Adding Event' : 'Error Updating Event'
         })
       }
-      this.$router.push({ name: 'admin-products' })
+      this.$router.push({ name: 'admin-events' })
 
 
     }
   },
   apollo: {
-    product: {
-      query: gql.queries.product,
+    event: {
+      query() {
+        return this.gql.queries.event
+      },
       loadingKey: 'loading',
       variables() {
         return {
           id: this.id
         }
       },
-      result({ data: { product } }) {
-        this.editProduct = { ...product }
+      result({ data: { event } }) {
+        this.editEvent = { ...event }
       },
       skip() {
         return this.isAdd

@@ -15,7 +15,7 @@ import Quasar, * as All from 'quasar'
 import router from './router'
 import defaultClient from './apollo'
 import VueApollo from 'vue-apollo'
-import gql from './gql'
+
 Vue.config.productionTip = false
 Vue.use(VueApollo)
 Vue.use(Quasar, {

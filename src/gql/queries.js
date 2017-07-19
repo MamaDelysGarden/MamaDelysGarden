@@ -32,8 +32,7 @@ export default {
                 id
                 name
                 description
-                startDate
-                endDate
+                image
             }
         }`,
     user: `query User($email: String!) {

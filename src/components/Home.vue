@@ -1,19 +1,49 @@
 <template lang="pug">
-.window-height.relative-position
-    q-carousel.text-white(arrows dots infinite autoplay).fit.absolute
-        img(v-for="(image,i) in images", :key="i", :src="image" slot="slide")
+div(v-if="events")
+    .window-height.row(style="padding-top: 64px")
+        .m-a.text-center.text-itc
+            div(style="font-size: 200px").text-primary Mama Dely's
+            div(style="font-size: 200px").text-green Garden
+            div(style="font-size: 100px").text-primay cafe,resto &amp; function hall
+    q-carousel.text-white(arrows dots infinite style="height: calc(50vh - 50px)", @slide="setSlide")
+        template(v-for="(event,i) in events")
+            .relative-position.fit(slot="slide").no-padding
+                img(:key="i", :src="event.image", style="object-fit: cover").absolute.fit.block
+                .text-center.layout-padding.absolute
+                    h2 {{currentEvent.name}}
+                    p {{currentEvent.description}}
+        q-btn(color="primary" big style="bottom: 0; left: 0" ).absolute View Previous Events
+    h1.text-center.text-itc(style="font-size: 150px") About
 </template>
 
 <script>
+
 export default {
     name: 'home',
+    inject: ['gql'],
     data() {
         return {
-            images: [
-                "https://scontent.fmnl4-1.fna.fbcdn.net/v/t31.0-8/18595645_298509983938729_3080520903457580186_o.jpg?_nc_eui2=v1%3AAeEM6xOJJBfB1p-MZVCxhPfkGqJu-hjeEQNIWvvJLiN7rB7zlfx1lfCgb4mN253TQFaZPd_GxwCrAAhSy3rjA17qZyy3d5VbVUHxNzBcSH8SJA&oh=bceae61e5d90e2c2e756367e1cd4ba01&oe=59F1B6E5",
-                "https://scontent.fmnl4-1.fna.fbcdn.net/v/t31.0-8/19620217_319487241841003_6134132989699157489_o.jpg?_nc_eui2=v1%3AAeHgfT8B5FxFuVKVLrKGn46MWB7_70CRmYGRdE0akIYVBzPe6QMp3wNq0Gbiny2v-TweN45YK_0dgrHCH7HvzsdQzlTaDCh1PRhqgNo2pS7Y2A&oh=90997a80b514ef79d8fbf7ece1a5534a&oe=5A0F274B",
-                "https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/18664564_300401140416280_7362651819520374646_n.jpg?_nc_eui2=v1%3AAeG7ktiepZRLilq3TLe1Gqe5guhG2gdN48TxCV6I5x63L92VQ6WTvPayIMywFnau8xy1FURLpZki26E9LBvaxHWMQtBbEVYzOf1r_0Y-83gsEg&oh=e8cfc72cd0568d5bc135387fbffb08a3&oe=59FB5028"
-            ]
+            slide: 0
+        }
+    },
+    computed: {
+        currentEvent() {
+            return this.events[this.slide]
+        }
+    },
+    methods: {
+        setSlide(slide,direction) {
+            this.slide = slide
+        }
+    },
+    apollo: {
+        events: {
+            query() {
+                return this.gql.queries.events
+            },
+            variables: {
+                first: 3
+            }
         }
     }
 }

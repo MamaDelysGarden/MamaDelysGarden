@@ -5,11 +5,14 @@
 </template>
 
 <script>
-/*
- * Root component
- */
+import gql from './gql'
 export default {
-  name: 'App'
+  name: 'App',
+  provide() {
+    return {
+      gql
+    }
+  }
 }
 </script>
 
