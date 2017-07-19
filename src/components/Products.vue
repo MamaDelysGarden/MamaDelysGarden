@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    h2.capitalize.layout-padding.text-secondary.bg-primary(style="padding-bottom: 16px") Products
+    h2.capitalize.layout-padding.text-secondary.bg-primary.no-margin(style="padding-bottom: 16px") Products
     .layout-padding(v-if="products")
         q-search(v-model="search")
         .row.xs-gutter

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    h2.capitalize.layout-padding.text-secondary.bg-primary(style="padding-bottom: 16px") Events
+    h2.capitalize.layout-padding.text-secondary.bg-primary.no-margin(style="padding-bottom: 16px") Events
     .layout-padding(v-if="events")
         q-search(v-model="search")
         .row.xs-gutter
