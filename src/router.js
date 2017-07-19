@@ -9,7 +9,9 @@ function load(component) {
 }
 Vue.component('products', load('Products'))
 Vue.component('events', load('Events'))
-Vue.component('admin-editor',load('AdminEditor'))
+
+Vue.component('grid',load('Grid'))
+
 export default new VueRouter({
   /*
    * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,

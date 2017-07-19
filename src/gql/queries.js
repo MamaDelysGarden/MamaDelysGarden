@@ -10,10 +10,21 @@ export default {
                 image
                 name
                 description
+                createdAt
             }
         }`,
     product: `query Product($id: ID!) {
-          product: Product(id: $id) {
+          item: Product(id: $id) {
+            image
+            description
+            id
+            createdAt
+            updatedAt
+            name
+          }
+        }`,
+    event: `query Event($id: ID!) {
+          item: Event(id: $id) {
             image
             description
             id
@@ -33,6 +44,7 @@ export default {
                 name
                 description
                 image
+                createdAt
             }
         }`,
     user: `query User($email: String!) {

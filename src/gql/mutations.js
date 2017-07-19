@@ -42,13 +42,32 @@ export default {
   }
 }
 `,
-    saveEvent: `mutation SaveEvent($name: String!, $description: String!, $startDate: DateTime!, $endDate: DateTime!) {
-  event: createEvent(name: $name, description: $description, startDate: $startDate, endDate: $endDate) {
+    createEvent: `mutation CreateEvent($image: String!, $name: String!, $description: String!) {
+  event: createEvent(image: $image, description: $description, name: $name) {
+    id
+    image
     name
     description
-    endDate
-    startDate
+    createdAt
+    updatedAt
   }
-}`
+}`,
+    updateEvent: `mutation UpdateEvent($id: ID!, $image: String!, $name: String!, $description: String!) {
+  event: updateEvent(id: $id, image: $image, description: $description, name: $name) {
+    id
+    image
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}`,
+    deleteEvent: `mutation DeleteEvent($id: ID!) {
+  event: deleteEvent(id: $id) {
+    id
+    name
+  }
+}
+`,
 
 }
