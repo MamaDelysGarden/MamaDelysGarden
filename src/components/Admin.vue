@@ -29,6 +29,7 @@ export default {
         })
         localStorage.setItem('token', data.token)
         await this.$apollo.queries.currentUser.refetch()
+        this.$router.push({ name: 'admin-products' })
       } catch (e) {
 
       } finally {
