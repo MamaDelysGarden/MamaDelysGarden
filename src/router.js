@@ -10,7 +10,7 @@ function load(component) {
 Vue.component('products', load('Products'))
 Vue.component('events', load('Events'))
 
-Vue.component('grid',load('Grid'))
+Vue.component('grid', load('Grid'))
 
 export default new VueRouter({
   routes: [
@@ -39,12 +39,6 @@ export default new VueRouter({
       path: '/admin',
       component: load('Admin'),
       children: [
-        {
-          path: '',
-          redirect: {
-            name: 'admin-products'
-          }
-        },
         {
           path: 'products',
           component: load('AdminProducts'),
