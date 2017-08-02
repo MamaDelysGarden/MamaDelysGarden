@@ -6,12 +6,15 @@
     q-tabs(slot="navigation" align="center")
       q-route-tab(slot="title" v-for="({name,icon,label},i) in routes", :key="i", :label="label", :icon="icon", :to="{name}")
 
-    router-view(v-if="!currentUser && loading")
+    router-view(v-if="currentUser && !loading && ($route.path !== '/admin/' || $route.path !== '/admin')")
+    .layout-padding.row(v-else-if="($route.path === '/admin/' || $route.path === '/admin')")
+      .m-a.text-center
+        h1 Hello Admin
     .layout-padding(v-else)
       q-field(icon="email")
-        q-input(v-model="user.email")
+        q-input(v-model="user.email" float-label="Email")
       q-field(icon="vpn_key")
-        q-input(v-model="user.password")
+        q-input(v-model="user.password" float-label="Password" type="password")
       .text-center
         q-btn(loader @click="login" color="primary" style="width: 150px") Login
 </template>
@@ -20,6 +23,28 @@
 export default {
   name: 'dashboard',
   inject: ['gql'],
+  data() {
+    return {
+      currentUser: null,
+      user: {
+        email: '',
+        password: ''
+      },
+      loading: 0,
+      routes: [
+        {
+          name: 'admin-products',
+          label: 'Products',
+          icon: 'shopping_basket'
+        },
+        {
+          name: 'admin-events',
+          label: 'Events',
+          icon: 'event'
+        },
+      ]
+    }
+  },
   methods: {
     async login(e, done) {
       try {
@@ -27,7 +52,8 @@ export default {
           mutation: this.gql.mutations.signInUser,
           variables: this.user
         })
-        localStorage.setItem('token', data.token)
+
+        localStorage.setItem('token', data.user.token)
         await this.$apollo.queries.currentUser.refetch()
         this.$router.push({ name: 'admin-products' })
       } catch (e) {
@@ -46,35 +72,16 @@ export default {
         done()
       }
     },
-    apollo: {
-      currentUser() {
-        return {
-          loadingKey: 'loading',
-          query: this.gql.queries.currentUser
-        }
-      }
-    },
-    data() {
+  },
+  apollo: {
+    currentUser() {
+      console.log(this.gql)
       return {
-        user: {
-          email: '',
-          password: ''
-        },
-        loading: 0,
-        routes: [
-          {
-            name: 'admin-products',
-            label: 'Products',
-            icon: 'shopping_basket'
-          },
-          {
-            name: 'admin-events',
-            label: 'Events',
-            icon: 'event'
-          },
-        ]
+        loadingKey: 'loading',
+        query: this.gql.queries.currentUser,
+        pollInterval: 1000
       }
     }
-  }
+  },
 }
 </script>
