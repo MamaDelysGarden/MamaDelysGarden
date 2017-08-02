@@ -1,11 +1,10 @@
 export default {
-    createUser: `mutation CreateUser($email: String!, $password: String!, $firstName: String, $middleName: String, $lastName: String, $image: String) {
-  user: createUser(authProvider: {email: {email: $email, password: $password}}, firstName: $firstName, middleName: $middleName, lastName: $lastName, image: $image) {
+  createUser: `mutation CreateUser($email: String!, $password: String!) {
+  user: createUser(authProvider: {email: {email: $email, password: $password}}) {
     id
-    email
   }
 }`,
-    signInUser: `mutation SignInUser($email: String!, $password: String!) {
+  signInUser: `mutation SignInUser($email: String!, $password: String!) {
   user: signinUser(email: {email: $email, password: $password}) {
     token
     user {
@@ -15,7 +14,7 @@ export default {
     }
   }
 }`,
-    createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!) {
+  createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!) {
   product: createProduct(image: $image, description: $description, name: $name) {
     id
     image
@@ -25,7 +24,7 @@ export default {
     updatedAt
   }
 }`,
-    updateProduct: `mutation UpdateProduct($id: ID!, $image: String!, $name: String!, $description: String!) {
+  updateProduct: `mutation UpdateProduct($id: ID!, $image: String!, $name: String!, $description: String!) {
   product: updateProduct(id: $id, image: $image, description: $description, name: $name) {
     id
     image
@@ -35,14 +34,14 @@ export default {
     updatedAt
   }
 }`,
-    deleteProduct: `mutation DeleteProduct($id: ID!) {
+  deleteProduct: `mutation DeleteProduct($id: ID!) {
   product: deleteProduct(id: $id) {
     id
     name
   }
 }
 `,
-    createEvent: `mutation CreateEvent($image: String!, $name: String!, $description: String!) {
+  createEvent: `mutation CreateEvent($image: String!, $name: String!, $description: String!) {
   event: createEvent(image: $image, description: $description, name: $name) {
     id
     image
@@ -52,7 +51,7 @@ export default {
     updatedAt
   }
 }`,
-    updateEvent: `mutation UpdateEvent($id: ID!, $image: String!, $name: String!, $description: String!) {
+  updateEvent: `mutation UpdateEvent($id: ID!, $image: String!, $name: String!, $description: String!) {
   event: updateEvent(id: $id, image: $image, description: $description, name: $name) {
     id
     image
@@ -62,7 +61,7 @@ export default {
     updatedAt
   }
 }`,
-    deleteEvent: `mutation DeleteEvent($id: ID!) {
+  deleteEvent: `mutation DeleteEvent($id: ID!) {
   event: deleteEvent(id: $id) {
     id
     name

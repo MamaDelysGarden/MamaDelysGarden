@@ -2,21 +2,25 @@
   q-layout
     q-toolbar(slot="header" reveal)
       q-toolbar-title Admin Mama Dely
-      q-btn(icon="exit_to_app" loader color="secondary" @click="logout" v-if="currentUser")
+        span(slot="subtitle" v-if="currentUser") {{currentUser.email}}
+      q-btn(icon="exit_to_app" loader color="secondary" @click="logout" v-if="currentUser" style="width: 150px") Logout
     q-tabs(slot="navigation" align="center")
       q-route-tab(slot="title" v-for="({name,icon,label},i) in routes", :key="i", :label="label", :icon="icon", :to="{name}")
 
-    router-view(v-if="currentUser && !loading && ($route.path !== '/admin/' || $route.path !== '/admin')")
-    .layout-padding.row(v-else-if="($route.path === '/admin/' || $route.path === '/admin')")
-      .m-a.text-center
-        h1 Hello Admin
+    router-view(v-if="currentUser && !loading")
     .layout-padding(v-else)
-      q-field(icon="email")
-        q-input(v-model="user.email" float-label="Email")
-      q-field(icon="vpn_key")
-        q-input(v-model="user.password" float-label="Password" type="password")
-      .text-center
-        q-btn(loader @click="login" color="primary" style="width: 150px") Login
+      q-card(style="width: 400px; margin: 0 auto;")
+        q-toolbar
+          q-toolbar-title Login/Register Admin        
+        q-card-main
+          q-field(icon="email")
+            q-input(v-model="user.email" float-label="Email")
+          q-field(icon="vpn_key")
+            q-input(v-model="user.password" float-label="Password" type="password")
+        .row.justify-around(style="padding-bottom: 16px")
+          q-btn(loader @click="login" color="secondary" style="width: 150px") Login
+          q-btn(loader @click="register" color="secondary" style="width: 150px") Register
+
 </template>
 
 <script>
@@ -72,6 +76,19 @@ export default {
         done()
       }
     },
+    async register(e, done) {
+      try {
+        await this.$apollo.mutate({
+          mutation: this.gql.mutations.createUser,
+          variables: this.user,
+        })
+        await this.login(e, done)
+      } catch (e) {
+
+      } finally {
+        done()
+      }
+    }
   },
   apollo: {
     currentUser() {
