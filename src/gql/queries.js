@@ -1,11 +1,11 @@
 export default {
-    productsCount: `query AllProductsCount($first: Int, $skip: Int, $search: String) {
-            count: _allProductsMeta(first: $first, skip: $skip, filter: {name_contains: $search}) {
+    productsCount: `query AllProductsCount($first: Int, $skip: Int, $search: String,  $category: PRODUCT_CATEGORY) {
+            count: _allProductsMeta(first: $first, skip: $skip, filter: {name_contains: $search, category: $category}) {
                 count
             }
         }`,
-    products: `query AllProducts($first: Int, $skip: Int, $search: String) {
-            products: allProducts(first: $first, skip: $skip, filter: {name_contains: $search}) {
+    products: `query AllProducts($first: Int, $skip: Int, $search: String, $category: PRODUCT_CATEGORY) {
+            products: allProducts(first: $first, skip: $skip, filter: {name_contains: $search, category: $category}) {
                 id
                 image
                 name
@@ -20,6 +20,7 @@ export default {
             id
             createdAt
             updatedAt
+            category
             name
           }
         }`,

@@ -5,6 +5,7 @@ export default {
     data() {
         return {
             loading: 0,
+          item: null
         }
     },
     computed: {
@@ -16,6 +17,7 @@ export default {
         },
         changed() {
             if (!this.item) return
+
             return Object.keys(this.edit).every(key => this.edit[key] === this.item[key])
         },
         isAdd() {
@@ -59,7 +61,7 @@ export default {
 
             }
             catch (e) {
-
+                console.log(e)
                 Toast.create.negative({
                     html: `Error ${this.isAdd ? 'Adding' : 'Updating'} ${this.label}`
                 })

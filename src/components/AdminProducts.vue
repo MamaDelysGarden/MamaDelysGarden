@@ -14,7 +14,8 @@ export default {
   mixins: [admin],
   data() {
     return {
-      label: 'Product'
+      label: 'Product',
+
     }
   }
 }

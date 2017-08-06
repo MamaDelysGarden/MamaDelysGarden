@@ -10,6 +10,7 @@
     .text-center
       img(:src="item ? item.image : edit.image" style="height: 300px; width: 300px")
     q-input(v-model="edit.image" float-label="Image", :readonly="loading")
+    q-select(v-model="category" float-label="Category", :options="categories")
   .row.window-height(v-else-if="loading")
     .text-center(style="margin: auto")
       h2 Loading {{label}}
@@ -23,16 +24,47 @@ export default {
   name: 'admin-product',
   props: ['id'],
   mixins: [editor],
+  watch: {
+      category(val) {
+          this.edit.category = val
+      }
+  },
   data() {
     return {
+        category: "STARTER",
       edit: {
         name: '',
         description: '',
-        image: ''
+        image: '',
+        category: ''
       },
       label: 'Product',
-      item: null,
-      loading: 0
+      categories: [
+        {
+          label: "Starter",
+          value: "STARTER"
+        },
+        {
+          label: "Rice Meal",
+          value: "RICE_MEAL"
+        },
+        {
+          label: "Frappe",
+          value: "FRAPPE"
+        },
+        {
+          label: "Drinks",
+          value: "DRINKS"
+        },
+        {
+          label: "Sandwich",
+          value: "SANDWICH"
+        },
+        {
+          label: "Family Group",
+          value: "FAMILY_GROUP"
+        }
+      ],
     }
   },
 

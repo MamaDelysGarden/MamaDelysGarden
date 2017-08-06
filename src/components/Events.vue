@@ -1,5 +1,5 @@
 <template lang="pug">
-    grid(label="events" @select="$emit('select',$event)")
+    grid(label="events", @select="$emit('select',$event)")
 </template>
 
 <script>
