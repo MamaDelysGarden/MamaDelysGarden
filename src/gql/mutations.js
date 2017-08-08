@@ -14,7 +14,7 @@ export default {
     }
   }
 }`,
-  createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!, $category: PRODUCT_CATEGORY) {
+  createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!, $category: PRODUCT_CATEGORY!) {
   product: createProduct(image: $image, description: $description, name: $name, category: $category) {
     id
     image
