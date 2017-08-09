@@ -25,18 +25,18 @@ export default {
   props: ['id'],
   mixins: [editor],
   watch: {
-      category(val) {
-          this.edit.category = val
-      }
+    category(val) {
+      this.edit.category = val
+    }
   },
   data() {
     return {
-        category: "STARTER",
+      category: "STARTER",
       edit: {
         name: '',
         description: '',
         image: '',
-        category: ''
+        category: 'STARTER'
       },
       label: 'Product',
       categories: [
