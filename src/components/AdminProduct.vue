@@ -53,8 +53,8 @@ export default {
           value: "FRAPPE"
         },
         {
-          label: "Drinks",
-          value: "DRINKS"
+          label: "Cold Drinks",
+          value: "COLD_DRINKS"
         },
         {
           label: "Sandwich",
@@ -63,6 +63,10 @@ export default {
         {
           label: "Family Group",
           value: "FAMILY_GROUP"
+        },
+        {
+          label: "Pansit & Pasta",
+          value: "Pansit_and_Pasta"
         }
       ],
     }
