@@ -1,10 +1,10 @@
 export default {
-    productsCount: `query AllProductsCount($first: Int, $skip: Int, $search: String,  $category: PRODUCT_CATEGORY) {
+    productsCount: `query AllProductsCount($first: Int, $skip: Int, $search: String, $category: Category) {
             count: _allProductsMeta(first: $first, skip: $skip, filter: {name_contains: $search, category: $category}) {
                 count
             }
         }`,
-    products: `query AllProducts($first: Int, $skip: Int, $search: String, $category: PRODUCT_CATEGORY) {
+    products: `query AllProducts($first: Int, $skip: Int, $search: String, $category: Category) {
             products: allProducts(first: $first, skip: $skip, filter: {name_contains: $search, category: $category}) {
                 id
                 image
