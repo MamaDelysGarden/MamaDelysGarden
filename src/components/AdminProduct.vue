@@ -61,13 +61,21 @@ export default {
           value: "SANDWICH"
         },
         {
+          label: "Hot Drinks",
+          value: "HOT_DRINKS"
+        },
+        {
+          label: "Cold Drinks",
+          value: "COLD_DRINKS"
+        },
+        {
+          label: "Pasta",
+          value: "PASTA"
+        },
+        {
           label: "Family Group",
           value: "FAMILY_GROUP"
         },
-        {
-          label: "Pansit & Pasta",
-          value: "Pansit_and_Pasta"
-        }
       ],
     }
   },

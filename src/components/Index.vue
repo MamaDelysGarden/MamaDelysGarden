@@ -5,7 +5,7 @@
       q-toolbar-title.text-primary.text-itc(style="font-size: 56px") Mama Dely's Garden
       q-btn(flat v-for="({name,icon},i) in routes", :key="i" round small @click="$router.push({name})")
         q-icon(:name="icon")
-    
+
     router-view
 
 </template>
@@ -23,7 +23,7 @@ export default {
         },
         {
           name: 'products',
-          icon: 'shopping_cart'
+          icon: 'restaurant_menu'
         },
         {
           name: 'events',

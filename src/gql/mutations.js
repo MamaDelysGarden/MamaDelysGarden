@@ -14,7 +14,7 @@ export default {
     }
   }
 }`,
-  createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!, $category: PRODUCT_CATEGORY!) {
+  createProduct: `mutation CreateProduct($image: String!, $name: String!, $description: String!, $category: Category!) {
   product: createProduct(image: $image, description: $description, name: $name, category: $category) {
     id
     image
@@ -24,7 +24,7 @@ export default {
     updatedAt
   }
 }`,
-  updateProduct: `mutation UpdateProduct($id: ID!, $image: String!, $name: String!, $description: String!, $category: PRODUCT_CATEGORY) {
+  updateProduct: `mutation UpdateProduct($id: ID!, $image: String!, $name: String!, $description: String!, $category: Category) {
   product: updateProduct(id: $id, image: $image, description: $description, name: $name, category: $category) {
     id
     image

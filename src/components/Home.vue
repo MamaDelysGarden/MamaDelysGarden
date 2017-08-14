@@ -1,12 +1,13 @@
 <template lang="pug">
 div
-    q-parallax.row(style="height: calc(100vh - 56px)"
+    q-parallax.row(style="height: calc(100vh - 74px)"
     src="https://scontent.fmnl8-1.fna.fbcdn.net/v/t1.0-9/18581691_300400793749648_5199578297950002422_n.jpg?_nc_eui2=v1%3AAeF19yiT0I3nbaP2wWZt--F2ylnqjiSN9TPLYD_RQYqMTOKHNJpsENP_7PW6ABsClEJ6OdXrL1peAw5PKSX3eE-RY42lAgti6JbRMvrkV8f2-A&oh=3215f2e0fbed79ebc14cbaaf3ae7d4fc&oe=5A31C873")
         .absolute.text-center.text-itc.text-secondary(style="margin: auto; z-index: 1")
-            div(style="font-size: 10rem") Mama Dely's
-            div(style="font-size: 6em") Garden
-            div(style="font-size: 4rem") cafe,resto &amp; function hall
-        .absolute.fit(style="background: rgba(0,0,0,0.45);")
+            div(style="font-size: 8rem") Mama Dely's
+            div(style="font-size: 5em") Garden
+            div(style="font-size: 3.5rem") cafe,resto &amp; function hall
+        h5.absolute-bottom-left.text-white Scroll to continue
+        .absolute.fit(style="background: rgba(0,0,0,0.0);")
     div(style="min-height: 100vh").bg-secondary
         q-carousel.text-white(arrows dots infinite style="height: 50vh" @slide="setSlide")
             template(v-for="(event,i) in events")
@@ -17,7 +18,7 @@ div
                         h2 {{currentEvent.name}}
                         p {{currentEvent.description}}
             q-btn(color="primary" big style="bottom: 0; left: 0" @click="$router.push({name: 'events'})").absolute View More Events
-        h1.text-center.text-itc(style="font-size: 150px").text-primary Events
+        h1.text-center.text-itc(style="font-size: 100px").text-primary Events
         p.text-center.text-white(style="width: 300px; margin: auto") Mama Dely's has great services and events for their customers, they also do caterings and other kinds of parties like debuts.
     div(style="min-height: 100vh").bg-secondary
         q-carousel.text-white(arrows dots infinite style="height: 50vh" @slide="setSlideProduct")
@@ -28,20 +29,19 @@ div
                     .text-center.layout-padding.absolute
                         h2 {{currentProduct.name}}
                         p {{currentProduct.description}}
-            q-btn(color="primary" big style="bottom: 0; left: 0", @click="$router.push({name: 'products'})").absolute View Menus Gallery
-        h1.text-center.text-itc(style="font-size: 150px").text-primary Menu
+            //q-btn(color="primary" big style="bottom: 0; left: 0", @click="$router.push({name: 'products'})").absolute View Menus Gallery
+        h1.text-center.text-itc(style="font-size: 100px").text-primary Menu
         p.text-center.text-white(style="width: 300px; margin: auto") Mama Dely's has great menus. Check out our delicious foods here.
         .text-center
           q-btn(color="primary",  @click="$router.push({name: 'products'})") Check it out here
-        h1.text-center.text-itc(style="font-size: 150px").text-primary About Us
+        h1.text-center.text-itc(style="font-size: 100px").text-primary About Us
         q-layout
-            q-fixed-position(corner='center', :offset='[90, 90]')
+            q-fixed-position(corner='center', :offset='[90, 0]')
                 q-card-media.row
-                    img.center(src='~assets/19030514_309067469549647_2582662800476357288_n.jpg' style="height :600px; width :500px")
-                    h2.text-center.text-white(style="width: 300px; margin: auto") History
-                        p.text-white(style="width: 300px; margin: auto") Mama Dely’s Garden is a newly opened restaurant located at 0013MLA. East Road Brgy. Pagasa 1940 Binangonan it was once known as Delys Pancit in 1975  and became a best selling pancit in Angono. Now it was re-open as Mama Delys Garden and Cafe owned by Mrs. Me-an Bautista Managed by Mrs. Jennifer Bautista this past days only their old customer come to their restaurant.
+                    img.center(src='~assets/19030514_309067469549647_2582662800476357288_n.jpg' style="height :400px; width :450px")
+                    p.text-white(style="width: 300px; margin: auto") Mama Dely’s Garden is a newly opened restaurant located at 0013MLA. East Road Brgy. Pagasa 1940 Binangonan it was once known as Delys Pancit in 1975  and became a best selling pancit in Angono. Now it was re-open as Mama Delys Garden and Cafe owned by Mrs. Me-an Bautista Managed by Mrs. Jennifer Bautista this past days only their old customer come to their restaurant.
         .layout-padding.text-center
-          h1.text-itc(style="font-size: 150px").text-primary Contact Location
+          h1.text-itc(style="font-size: 100px").text-primary Contact Location
           h6.text-itc(style="font-size: 50px").text-green Mama Dely's Garden
           .text-white(style="width: 300px; margin: auto")
             p Opens at: Monday to Thursday 12:00 PM to 12:00 AM
@@ -50,8 +50,8 @@ div
             p Sunday 10:00 AM to 12:00 AM
             br
             p Cellphone no. : 0975 668 6847
-            p Visit us at: www.MamaDelysGarden
-            p Located at: 0013 Mla. East Road Brgy. Pagasa 1940 Binangonan
+            p Visit our facebook page at: www.MamaDelysGardenPH
+            p Located at: 0013 Mla. East Road Brgy. Pagasa Binangonan
 </template>
 
 <script>
@@ -85,6 +85,18 @@ export default {
               label: "Sandwich",
               value: "SANDWICH"
             },
+                    {
+          label: "Hot Drinks",
+          value: "HOT_DRINKS"
+        },
+        {
+          label: "Cold Drinks",
+          value: "COLD_DRINKS"
+        },
+        {
+          label: "Pasta",
+          value: "PASTA"
+        },
             {
               label: "Family Group",
               value: "FAMILY_GROUP"

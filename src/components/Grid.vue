@@ -15,7 +15,7 @@ div
                         .relative-position(slot="overlay")
                             q-card-title {{item.name}}
                             p.text-center {{item.description}}
-                            h6.absolute.text-center(style="top: 250px; left: 16px") {{item.createdAt | formatDate("MMM, DD, YYYY")}}
+                            //h6.absolute.text-center(style="top: 250px; left: 16px") {{item.createdAt | formatDate("MMM, DD, YYYY")}}
         q-list(no-border multiline v-else)
           q-item(v-for="(item,i) in items", :key="i", @click="$emit('select',item)").cursor-pointer
             q-item-side(:avatar="item.image")
